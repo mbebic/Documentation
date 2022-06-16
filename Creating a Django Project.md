@@ -7,19 +7,19 @@ The first thing is start by creating a project in anaconda prompt. Keep in mind 
 To start a project, run the following line:
 
 ```shell
-django-admin startproject NAME
+django-admin startproject PROJNAME
 ```
 
 After the project is created, go to the directory via the <code>cd</code> command. 
 
 ```shell
-cd NAME
+cd PROJNAME
 ```
 
 Start up a server with the following line:
 
 ```shell
-python manange.py runserver
+python manage.py runserver
 ```
 
 After going to your local hosted webpage <code>127.0.0.1:8000</code> , a screen will show up with a rocket and a message saying "The install worked successfully! Congratulations!
@@ -29,10 +29,10 @@ This is not a landing page though. So, an "app" needs to be made to create dynam
 Exit out of the server by CTRL-C, and then run the following line:
 
 ```shell
-python manage.py startapp pages
+python manage.py startapp APPNAME
 ```
 
-When the app is made, we need to add it to Django's <code>INSTALLED_APPS</code>. We write the app name 'pages' at the end of the INSTALLED_APPS block in the project's settings.py file.
+When the app is made, we need to add it to Django's <code>INSTALLED_APPS</code>. We write the app name 'APPNAME' at the end of the INSTALLED_APPS block in the project's settings.py file.
 
 ```shell
 INSTALLED_APPS = [
@@ -42,14 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'pages',
+    'APPNAME',
 ]
 ```
 
 ## URLS
-When a request comes to a server to open a page, Django needs to be able to find a "view", or web page that will show when the response is processed. This is done within urlpatterns, in the projects main directory; in our case, it is NAME/urls.py.
+When a request comes to a server to open a page, Django needs to be able to find a "view", or web page that will show when the response is processed. This is done within urlpatterns, in the projects main directory; in our case, it is PROJNAME/urls.py.
 
-In order to show the landing page on the local host and essentially on our main domain, we add the following code to pages/urls.py, on our app urls.py file.
+In order to show the landing page on the local host and essentially on our main domain, we add the following code to APPNAME/urls.py, on our app urls.py file.
 
 ```shell
 from django.urls import path
@@ -60,7 +60,7 @@ urlpatterns = [
 ]
 ```
 
-A path is what comes after a domain in a URL. For example, in the URL <code>https://www.google.com/search?q=pages</code>, the path would be <code>search?q=pages</code>. Since we want our landing page to be on the <code>/</code> path, the first parameter we provide to the path method is <code>''</code>. The second argument is what view we need to render which is an <code>index</code> view in our case.
+A path is what comes after a domain in a URL. For example, in the URL <code>https://www.google.com/search?q=pages</code>, the path would be <code>search?q=APPNAME</code>. Since we want our landing page to be on the <code>/</code> path, the first parameter we provide to the path method is <code>''</code>. The second argument is what view we need to render which is an <code>index</code> view in our case.
 
 We also add our urlpatterns from our app into the project's urls.py file.
 
@@ -69,7 +69,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include('pages.urls')),
+    path('', include('APPNAME.urls')),
     path('admin/', admin.site.urls),
 ]
 ```
@@ -81,7 +81,7 @@ The index view now needs to be created, which is done in the views.py file for t
 from django.shortcuts import render
 
 def index(request):
-    return render(request, 'pages/index.html')
+    return render(request, 'APPNAME/index.html')
 ```
 
 ## The Template
