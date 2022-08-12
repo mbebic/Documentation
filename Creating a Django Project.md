@@ -88,6 +88,64 @@ def index(request):
 
 We need a landing page to be created! This is where you can have fun with your HTML, CSS, and Bootstrap design of a page. You can look further into our Game24 code, where a fully developed process of this example is demonstrated.
 
+## Migrating your Project and Creating a Superuser 
 
+It is important to an initial migration, as this will set up your admin, auth, contenttypes, and sessions apps. These are built into Django when you initially start a project, but it is essential to migrate them over in order to not get into trouble later down the line when you want to implement login and logout features (more on that later).
 
+Run the following lines:
 
+``` shell
+python manage.py makemigrations
+python manage.py migrate 
+
+```
+
+This will run a bunch of migrations for the apps specified above. Once that passes through successfully, we can move on to creating a superuser. This is really handy to have as the superuser has access to the admin portal of your Django project, which allows you to have an unlimited amount of access into the way your models, forms, media, files, etc. are all stored in your project. 
+
+To set up a superuser, run the following line:
+
+``` shell
+python manage.py createsuperuser
+```
+
+The console will prompt you to fill out a username, email address, and password twice. Once they are filled in, the console will notify you that <code>Superuser created successfully.</code>
+
+From this point on, we are able to create login and logout responses in our app. This is super easy to do, so don't worry!
+
+Firstly, we must create a login html page. The one I use is this:
+
+``` shell
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <h1 class="text-center mt-4">Login to Your Account</h1>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        {% if message %}
+                            <div>{{ message }}</div>
+                        {% endif %}
+                        
+                        <form action="{% url 'login' %}" class="text-center" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="text" name="username" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <input class="form-control" type="password" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Login">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+In here, you can see a csrf token is used; this is to protect sensitive information, in this case, a username and password. There are multiple other levels of security that can be implemented.
