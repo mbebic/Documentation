@@ -22,7 +22,7 @@ Now, we redirect ourselves to Heroku for a moment. We initialize a project on He
 
 Return to your anaconda command prompt. 
 
-Next, run <code>heroku login</code>. Press and key to activate the login process in your browser, and once it is complete, return back to the command prompt to continue.
+Next, run <code>heroku login</code>. Press any key to activate the login process in your browser, and once it is complete, return back to the command prompt to continue.
 
 We can run the line <code>heroku apps</code> to see what apps are collaborative and which are your own. 
 
